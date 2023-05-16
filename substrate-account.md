@@ -13,13 +13,13 @@ ref: https://docs.substrate.io/fundamentals/accounts-addresses-keys/
 
 ## 地址编码和链特定地址
 
-通过从单个公钥派生多个地址，您可以与多个链进行交互，而无需为每个网络创建单独的公私钥对。默认情况下，与帐户的公钥关联的地址使用Substrate SS58地址格式。 SS58地址格式是base-58编码的增强版本。 SS58地址格式包含以下重要特征：
+通过从单个公钥派生多个地址，您可以与多个链进行交互，而无需为每个网络创建单独的公私钥对。默认情况下，与帐户的公钥关联的地址使用Substrate [SS58地址格式](https://docs.substrate.io/reference/glossary/#ss58-address-format)。 SS58地址格式是[base-58编码](https://datatracker.ietf.org/doc/html/draft-msporny-base58-01)的增强版本。 SS58地址格式包含以下重要特征：
 
 - 编码地址由58个字母数字字符组成，比十六进制编码的地址更短且更易识别。
 - 地址不使用在字符串中难以区分的字符。例如，SS58地址不使用字符0、O、I和l。
 - 地址可以包括特定于网络的前缀，因此您可以使用相同的公钥派生不同链的地址。
 - 地址可以使用派生路径从同一公钥创建多个地址，因此您可以为不同目的使用不同的地址。例如，您可以创建用于分离资金或执行特定类型交易的子帐户。
-- 地址可以使用校验和来验证以防止输入错误。
+- 地址可以通过checksum进行校验，以防止输入错误。
 
 ### 检查网络特定地址
 
@@ -34,17 +34,17 @@ Generic Substrate chain (SS58)	| 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQ
 
 每个基于Substrate的区块链都可以注册自定义前缀以创建特定于网络的地址类型。例如，所有Polkadot地址都以1开头。所有Kusama地址都以大写字母开头。所有未注册的Substrate链都以5开头。
 
-您可以使用subkey inspect命令和--network命令行选项或使用Subscan查找公钥的特定于网络的地址。
+您可以使用subkey inspect命令和--network命令行选项或使用[Subscan](https://polkadot.subscan.io/tools/format_transform)查找公钥的特定于网络的地址。
 
-请参见subkey查看有关生成公私钥对并检查地址的信息。有关注册特定于链的地址的信息，请参阅SS58存储库中的说明。
+请参见[subkey](https://docs.substrate.io/reference/command-line-tools/subkey/)查看有关生成公私钥对并检查地址的信息。有关注册特定于链的地址的信息，请参阅[SS58仓库](https://github.com/paritytech/ss58-registry)中的说明。
 
 ## FRAME中的账户信息
 
-从概念上讲，帐户表示具有一个或多个公开地址的公私钥对的身份。但是，在使用FRAME构建的运行时中，帐户被定义为长度为32字节的地址标识符和相应的帐户信息（例如这个帐户已操作的交易数量、依赖于帐户的模块数量和帐户余额）的存储映射。
+从概念上讲，帐户表示具有一个或多个公开地址的公私钥对的身份。但是，在使用FRAME构建的runtime中，帐户被定义为长度为32字节的地址标识符和相应的帐户信息（例如这个帐户已操作的交易数量、依赖于帐户的模块数量和帐户余额）的存储映射。
 
-帐户属性（例如AccountId）可以在frame_system模块中通用地定义。然后，通用类型在运行时实现中解析为特定类型，并最终分配特定的值。例如，FRAME中的Account类型依赖于关联的AccountId类型。而AccountId类型是一个泛型，直到为需要此信息的 pallet在运行时实现中给它分配类型为止。
+帐户属性（例如AccountId）可以在frame_system模块中通用地定义。然后，通用类型在runtime实现中解析为特定类型，并最终分配特定的值。例如，FRAME中的Account类型依赖于关联的AccountId类型。而AccountId类型是一个泛型，直到为需要此信息的 pallet在runtime实现中给它分配类型为止。
 
-有关在frame_system pallet 中定义帐户以及Account存储映射中的帐户属性的更多信息，请参见 Account数据结构。有关使用泛型的更多信息，请参见 Rust for Substrate。
+有关在frame_system pallet 中定义帐户以及Account存储映射中的帐户属性的更多信息，请参见 [Account数据结构](https://docs.substrate.io/reference/account-data-structures/)。有关使用泛型的更多信息，请参见 [Rust for Substrate](https://docs.substrate.io/learn/rust-basics/#generic-types)。
 
 ## 特定账户
 
@@ -55,7 +55,7 @@ Generic Substrate chain (SS58)	| 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQ
 - 对特定功能的限制访问
 - 对特定 pallet 的访问限制
 
-在大多数情况下，专门的帐户要么在特定的FRAME pallet的上下文中实现，要么在预构建的 pallet（例如Staking或Multisig）中实现，要么在你设计的自定义 pallet中实现。
+在大多数情况下，专门的帐户要么在特定的FRAME pallet的上下文中实现，要么在预构建的 pallet（例如[Staking](https://paritytech.github.io/substrate/master/pallet_staking/index.html)或[Multisig](https://paritytech.github.io/substrate/master/pallet_multisig/index.html)）中实现，要么在你设计的自定义 pallet中实现。
 
 例如，Staking pallet接受想要提供保证金的原生的FRAME系统帐户，并生成stash和controller帐户抽象以标识执行特定操作所需的帐户。您可以在Polkadot生态中看到这些帐户抽象的实现。但是，您可以使用相同的框架来实现不同的帐户规则或帐户类型，或者将其作为灵感设计具有自己的帐户抽象的自定义 pallet。
 
@@ -64,7 +64,7 @@ Generic Substrate chain (SS58)	| 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQ
 
 通常，帐户只有一个所有者，该所有者持有用于签署交易的私钥。 Multisig pallet使你能够为执行需要被多个帐户所有者批准的交易配置专门的帐户。多签帐户是一个具有公钥但没有私钥的地址。多重签名帐户的公开地址是从确定性的授权帐户签署人列表、相关交易请求块高度和extrinsic索引标识符派生的。
 
-Multisig pallet使多方共享执行某些交易的责任。任何帐户的持有者都可以指定允许批准多签交易的帐户，以及调用被分派到运行时所需的最小批准数量。
+Multisig pallet使多方共享执行某些交易的责任。任何帐户的持有者都可以指定允许批准多签交易的帐户，以及调用被分派到runtime所需的最小批准数量。
 
 ### 代理和无密钥账户
 
@@ -79,19 +79,19 @@ Proxy pallet提供了另一种使用FRAME为基于Substrate的链配置专用帐
 - 取消或拒绝由代理执行传递过来的交易。
 - 创建匿名(纯代理)帐户，这些帐户没有私钥，可以通过其配置的代理进行操作，而无需拥有帐户所有权。
 
-#### 运行时实现
+#### Runtime实现
 
-虽然Proxy pallet提供了配置代理帐户的框架，但运行时开发人员需要自己实现细节。例如，默认的Proxy pallet基于代理类型过滤一个代理帐户可以分派的调用。但是，运行时实现定义了代理类型和每个代理类型允许执行的交易。Polkadot使您能够使用以下代理类型限制代理帐户的交易：
+虽然Proxy pallet提供了配置代理帐户的框架，但runtime开发人员需要自己实现细节。例如，默认的Proxy pallet基于代理类型过滤一个代理帐户可以分派的调用。但是，runtime实现定义了代理类型和每个代理类型允许执行的交易。Polkadot使您能够使用以下代理类型限制代理帐户的交易：
 
 - Any
-- 非转移
-- 治理
-- 质押
-- 身份审判
-- 取消代理
-- 拍卖
+- NonTransfer
+- Governance
+- Staking
+- IdentityJudgement
+- CancelProxy
+- Auction
 
-这些代理类型列表以及匹配代理类型与交易的逻辑在Polkadot运行时中定义。
+这些代理类型列表以及匹配代理类型与交易的逻辑在[Polkadot runtime](https://github.com/paritytech/polkadot/blob/master/runtime/polkadot/src/lib.rs)中定义。
 
 
 #### 匿名代理账户
@@ -109,16 +109,8 @@ Proxy pallet提供了另一种使用FRAME为基于Substrate的链配置专用帐
 
 有关使用帐户、地址和密钥的更多信息，请参见以下资源：
 
-- SS58特征实现
-- SS58注册表
-- 命令参考：subkey
-- Account数据结构
-- 密码学
-
-
-
-
-
-
-
-
+- [SS58 接口实现](https://paritytech.github.io/substrate/master/sp_core/crypto/trait.Ss58Codec.html)
+- [SS58 注册仓库](https://github.com/paritytech/ss58-registry/)
+- [命令参考：subkey](https://docs.substrate.io/reference/command-line-tools/subkey/)
+- [Account数据结构](https://docs.substrate.io/reference/account-data-structures/)
+- [密码学](https://docs.substrate.io/learn/cryptography/)
