@@ -8,7 +8,7 @@ Ref: https://docs.substrate.io/learn/transaction-lifecycle/
 
 ## 交易在哪里定义
 
-如 Runtime development 中所讨论的，Substrate 运行时包含定义了交易属性的业务逻辑，包括：
+如 [Runtime development](https://docs.substrate.io/learn/runtime-development/) 中所讨论的，Substrate 运行时包含定义了交易属性的业务逻辑，包括：
 
 - 由什么构成一个有效的交易
 - 交易是以签名还是未签名的方式发送
@@ -22,11 +22,11 @@ Ref: https://docs.substrate.io/learn/transaction-lifecycle/
 
 ![](https://docs.substrate.io/static/05e81b6aa161457fbf3aec95141f90a2/0fe02/transaction-lifecycle.avif)
 
-任何发送到非授权节点的已签名或未签名交易都会被传播到网络中的其他节点，并进入它们的交易池，直到被授权节点接收。
+任何发送到[非授权节点](https://docs.substrate.io/learn/transaction-lifecycle/)的已签名或未签名交易都会被传播到网络中的其他节点，并进入它们的交易池，直到被授权节点接收。
 
 ## 交易的验证以及交易队列
 
-如 Consensus 中所讨论的，网络中的大多数节点必须就块中交易的顺序达成一致，以达成对区块链状态的一致，并进而安全地添加块。为了达成共识，三分之二的节点必须就交易的执行顺序和导致的状态的变化达成一致。为了给共识做准备，交易首先在本地节点上进行验证并排队在交易池中。
+如 [Consensus](https://docs.substrate.io/learn/consensus/) 中所讨论的，网络中的大多数节点必须就块中交易的顺序达成一致，以达成对区块链状态的一致，并进而安全地添加块。为了达成共识，三分之二的节点必须就交易的执行顺序和导致的状态的变化达成一致。为了给共识做准备，交易首先在本地节点上进行验证并排队在交易池中。
 
 ### 验证交易池中的交易
 
@@ -38,7 +38,7 @@ Ref: https://docs.substrate.io/learn/transaction-lifecycle/
 
 在进行初始有效性检查之后，交易池会定期检查池中现有的交易是否仍然有效。如果发现某个交易无效或已过期，则会从池中删除。
 
-交易池仅处理交易的有效性以及被放在交易队列中的有效交易的顺序。有关验证机制如何工作的具体细节，包括处理费用、帐户或签名的方式，请参见 validate_transaction 方法。
+交易池仅处理交易的有效性以及被放在交易队列中的有效交易的顺序。有关验证机制如何工作的具体细节，包括处理费用、帐户或签名的方式，请参见 [validate_transaction](https://paritytech.github.io/substrate/master/sp_transaction_pool/runtime_api/trait.TaggedTransactionQueue.html#method.validate_transaction) 方法。
 
 ### 将有效交易添加到交易队列中
 
@@ -61,7 +61,7 @@ Ref: https://docs.substrate.io/learn/transaction-lifecycle/
 
 如果节点是下一个块的出块节点，则节点使用优先级系统为下一个块执行交易排序。交易按从高到低的优先级排序，直到块达到最大容量（weight）或长度。
 
-交易优先级在运行时中计算，并作为附加在交易上的标记提供给外部节点。在 FRAME 运行时中，使用一个特定的 pallet 根据与交易相关的权重和费用来计算优先级。除了 inherents 之外，此优先级计算适用于所有交易类型。inherents 始终由 EnsureInherentsAreFirst trait 确保排在最前面。
+交易优先级在运行时中计算，并作为附加在交易上的标记提供给外部节点。在 FRAME 运行时中，使用一个特定的 pallet 根据与交易相关的权重和费用来计算优先级。除了 inherents 之外，此优先级计算适用于所有交易类型。inherents 始终由 [EnsureInherentsAreFirst](https://paritytech.github.io/substrate/master/frame_support/traits/trait.EnsureInherentsAreFirst.html) trait 确保排在最前面。
 
 ### 基于账户的交易定序
 
@@ -93,7 +93,7 @@ Ref: https://docs.substrate.io/learn/transaction-lifecycle/
  
 在块初始化之后，每个有效交易按交易优先级顺序执行。重要的是要记住，在执行之前不会缓存状态。相反，在执行期间的状态更改会被直接写入存储。如果交易在执行过程中失败，则在遇到错误之前发生的任何状态更改都不会被还原，这会使块处于不可恢复状态。于是，在将任何状态更改提交到存储之前，运行时逻辑应执行所有必要的检查以确保 extrinsic 能成功运行。
 
-请注意，事件也会写入存储。因此，在完成所有逻辑之前，运行时不应发出事件。如果在发出事件交易失败了，也不会撤消该事件。
+请注意，[事件](https://docs.substrate.io/build/events-and-errors/)也会写入存储。因此，在完成所有逻辑之前，运行时不应发出事件。如果在发出事件交易失败了，也不会撤消该事件。
 
 ### 完成块 
 
@@ -118,16 +118,16 @@ on_idle 函数还会贯穿剩余的块权重，以允许基于区块链使用情
 
 在大多数情况下，你不需要了解交易如何被传播，以及块是如何被网络上的其他节点导入的。但是，如果你计划写一些自定义共识逻辑，或想了解有关块导入队列实现的更多信息，则可以在 Rust API 文档中找到详细信息。
 
-- ImportQueue
-- Link
-- BasicQueue
-- Verifier
-- BlockImport
+- [ImportQueue](https://paritytech.github.io/substrate/master/sc_consensus/import_queue/trait.ImportQueue.html)
+- [Link](https://paritytech.github.io/substrate/master/sc_consensus/import_queue/trait.Link.html)
+- [BasicQueue](https://paritytech.github.io/substrate/master/sc_consensus/import_queue/struct.BasicQueue.html)
+- [Verifier](https://paritytech.github.io/substrate/master/sc_consensus/import_queue/trait.Verifier.html)
+- [BlockImport](https://paritytech.github.io/substrate/master/sc_consensus/block_import/trait.BlockImport.html)
 
 
 ## 下一步去哪
 
-- Seminar: Lifecycle of a transaction
-- Accounts, addresses, and keys
+- [Seminar: Lifecycle of a transaction](https://www.youtube.com/watch?v=3pfM0GOp02c)
+- [Accounts, addresses, and keys](https://docs.substrate.io/learn/accounts-addresses-keys/)
 
 
