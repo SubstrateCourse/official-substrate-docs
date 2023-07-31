@@ -6,5 +6,5 @@ Potencial status includes `translated`, `refined`, `proofed`, `published`.
 
 - [Accounts, addresses, and keys](https://docs.substrate.io/learn/accounts-addresses-keys/), published
 - [Transaction lifecycle](https://docs.substrate.io/learn/transaction-lifecycle/), published
-- [Cryptography](https://docs.substrate.io/learn/cryptography/), refined
-- [Consensus](https://docs.substrate.io/learn/consensus/), refined
+- [Cryptography](https://docs.substrate.io/learn/cryptography/), published
+- [Consensus](https://docs.substrate.io/learn/consensus/), published
