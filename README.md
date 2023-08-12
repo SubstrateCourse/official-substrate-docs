@@ -4,7 +4,7 @@ Status:
 
 Potencial status includes `translated`, `refined`, `proofed`, `published`.
 
-- [Welcome](https://docs.substrate.io/learn/welcome-to-substrate/), Refined
+- [Welcome](https://docs.substrate.io/learn/welcome-to-substrate/), published
 - [Accounts, addresses, and keys](https://docs.substrate.io/learn/accounts-addresses-keys/), published
 - [Transaction lifecycle](https://docs.substrate.io/learn/transaction-lifecycle/), published
 - [Cryptography](https://docs.substrate.io/learn/cryptography/), published
