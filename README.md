@@ -9,3 +9,4 @@ Potencial status includes `translated`, `refined`, `proofed`, `published`.
 - [Transaction lifecycle](https://docs.substrate.io/learn/transaction-lifecycle/), published
 - [Cryptography](https://docs.substrate.io/learn/cryptography/), published
 - [Consensus](https://docs.substrate.io/learn/consensus/), published
+- [Blockchain basics](https://docs.substrate.io/learn/blockchain-basics/), published
