@@ -5,28 +5,28 @@ ref: https://docs.substrate.io/learn/runtime-development/
 如在[架构](https://docs.substrate.io/learn/architecture/)一篇中所讨论的，Substrate节点的Runtime包含了执行交易、保存状态的变化，和与外部节点交互的所有业务逻辑。Substrate提供了构建常见区块链组件所需的所有工具，因此你可以专注于开发定义区块链行为的Runtime逻辑。
 
 
-## 状态的转移及runtime
+## 状态变化及runtime
 
-在最基本的层面上，每个区块链本质上都是一个账本或记录，记录了链上发生的每一次变化。在基于Substrate的链中，这些状态变化被记录在runtime中。因为是由runtime来处理这个操作，所以有时候会把runtime描述为提供了[状态转换函数](https://docs.substrate.io/reference/glossary/#state-transition-function-stf)。
+从本质上看，每个区块链本质上都是一个账本或记录，记录了链上发生的每一次变化。在基于Substrate的链中，这些改变链上状态的方式被记录在runtime中。因为是由runtime来处理这个操作，所以有时候会把runtime描述为[状态转换函数](https://docs.substrate.io/reference/glossary/#state-transition-function-stf)。
 
-因为状态转移发生在运行时，所以运行时是你定义存储项和[交易](https://docs.substrate.io/learn/transaction-types/)行为的地方。存储项代表区块链的[状态](https://docs.substrate.io/reference/glossary/#state)，而交易允许区块链用户改变这个状态。
+因为状态变化发生在runtime，所以在runtime中定义存储项和[交易](https://docs.substrate.io/learn/transaction-types/)行为。存储项代表区块链的[状态](https://docs.substrate.io/reference/glossary/#state)，而交易允许区块链用户改变这个状态。
 
 ![](https://docs.substrate.io/static/6effe44b9d2d6811634d627228b41c48/154d5/state-transition-function.webp)
 
-Substrate运行时决定哪些交易是有效的，哪些是无效的，以及如何根据交易改变链状态。
+Substrateruntime决定哪些交易是有效的，哪些是无效的，以及如何根据交易改变链状态。
 
 ## Runtime接口
 
-正如你在[架构](https://docs.substrate.io/learn/architecture/)中学到的，外层节点负责处理节点发现、事务池、块和交易传播、共识以及响应来自外部世界的RPC调用。这些任务经常需要外层节点查询运行时的信息或向运行时提供信息。运行时API实现了外层节点和运行时之间的这种通信。
+正如你在[架构](https://docs.substrate.io/learn/architecture/)中学到的，节点外层的host部分负责处理节点发现、交易池、区块和交易传播、共识以及响应来自外部世界的RPC调用。这些任务经常需要外层节点查询runtime的信息或向runtime提供信息。runtime API实现了节点外层host和runtime之间的这种通信。
 
-在Substrate中，sp_api crate提供了一个实现运行时API的接口。它旨在让你有灵活性地使用[impl_runtime_apis](https://paritytech.github.io/substrate/master/sp_api/macro.impl_runtime_apis.html)宏定义你的自定义接口。然而，每个运行时都必须实现[Core](https://paritytech.github.io/substrate/master/sp_api/trait.Core.html)和[Metadata](https://paritytech.github.io/substrate/master/sp_api/trait.Core.html)接口。除了这些必需的接口，大多数Substrate节点（如节点模板）实现了以下运行时接口：
+在Substrate中，sp_api crate提供了一个实现runtime API的接口。它旨在让你灵活性地使用[impl_runtime_apis](https://paritytech.github.io/substrate/master/sp_api/macro.impl_runtime_apis.html)宏实现自定义的接口。并且，每个runtime都必须实现[Core](https://paritytech.github.io/substrate/master/sp_api/trait.Core.html)和[Metadata](https://paritytech.github.io/substrate/master/sp_api/trait.Core.html)接口。除了这些必需的接口，大多数Substrate节点（如节点模板）实现了以下runtime接口：
 
 - [BlockBuilder](https://paritytech.github.io/substrate/master/sp_block_builder/trait.BlockBuilder.html)用于构建块所需的功能。
 - [TaggedTransactionQueue](https://paritytech.github.io/substrate/master/sp_transaction_pool/runtime_api/trait.TaggedTransactionQueue.html)用于验证交易。
 - [OffchainWorkerApi](https://paritytech.github.io/substrate/master/sp_offchain/trait.OffchainWorkerApi.html)用于启用offchain操作。
-- [AuraApi](https://paritytech.github.io/substrate/master/sp_consensus_aura/trait.AuraApi.html)用于使用一种轮询方法的共识进行区块作者和验证。
+- [AuraApi](https://paritytech.github.io/substrate/master/sp_consensus_aura/trait.AuraApi.html)用于使用一种轮询方法的共识进行区块生成和验证。
 - [SessionKeys](https://paritytech.github.io/substrate/master/sp_session/trait.SessionKeys.html)用于生成和解码会话密钥。
-- [GrandpaApi](https://paritytech.github.io/substrate/master/sp_consensus_grandpa/trait.GrandpaApi.html)用于将区块最终确定到运行时。
+- [GrandpaApi](https://paritytech.github.io/substrate/master/sp_consensus_grandpa/trait.GrandpaApi.html)用于将区块最终确定。
 - [AccountNonceApi](https://paritytech.github.io/substrate/master/frame_system_rpc_runtime_api/trait.AccountNonceApi.html)用于查询交易索引。
 - [TransactionPaymentApi](https://paritytech.github.io/substrate/master/pallet_transaction_payment_rpc_runtime_api/trait.TransactionPaymentApi.html)用于查询关于交易的信息。
 - [Benchmark](https://paritytech.github.io/substrate/master/frame_benchmarking/trait.Benchmark.html)用于估计和测量完成交易所需的执行时间。
@@ -34,40 +34,40 @@ Substrate运行时决定哪些交易是有效的，哪些是无效的，以及�
 
 ## 核心原语
 
-Substrate还定义了运行时必须实现的核心原语。Substrate框架对你的运行时必须提供给Substrate的其他层的内容做了最少的假设。然而，有一些数据类型必须被定义，并且必须满足一个特定的接口，才能在Substrate框架中工作。
+Substrate还定义了runtime必须实现的核心原语。Substrate框架对你的runtime必须提供给Substrate的其他层的内容做了最少的假设。然而，有一些数据类型必须被定义，并且必须满足一个特定的接口，才能在Substrate框架中工作。
 
 这些核心原语是：
 
-- `Hash`：一种编码某些数据的加密摘要的类型。通常只是一个256位的量。
-- `DigestItem`：一种必须能够编码一些与共识和变更追踪相关的“硬编码”的备选项，以及与运行时中特定模块相关的任意数量的“软编码”的变体的类型。
-- `Digest`：一系列DigestItems。这编码了轻客户端在区块中需要手头有的所有信息。
-- `Extrinsic`：一种表示来自区块链外部的单个数据片段，并被区块链识别的类型。这通常涉及一个或多个签名，以及某种编码指令（例如，用于转移资金所有权或调用智能合约）。
-- `Header`：一种代表与区块相关的所有信息（无论是加密方式还是其他方式）的类型。它包括父哈希、存储根和外部树根、摘要和区块编号。
+- `Hash`：用于生成数据的加密摘要的类型。通常是256 bit。
+- `DigestItem`：它是一个枚举类型，能够编码与共识和变更追踪相关的特定摘要项，以及与runtime中模块相关的任意数量 "soft-coded" 变体。
+- `Digest`：一系列DigestItem，它编码了轻客户端所需的区块内的信息。
+- `Extrinsic`：该类型表示来自区块链外部的单个数据片段，它能够被区块链识别。这一类型通常包含一个或多个签名，以及某种编码指令（例如，用于转移资金或调用智能合约）。
+- `Header`：该类型（以加密或其他方式）代表了区块信息。它包括父区块的哈希、存储根和外部交易的trie root，摘要和区块编号。
 - `Block`：本质上只是Header和一系列Extrinsics的组合，以及要使用的哈希算法的规范。
-- `BlockNumber`：一种编码任何有效区块拥有的祖先总数的类型。通常是一个32位的量。
+- `BlockNumber`：表示任何有效区块拥有的“祖先”总数。通常是32 bit类型。
 
 
 ## FRAME
 
-[FRAME](https://docs.substrate.io/reference/glossary/#frame)是你作为运行时开发者可用的最强大的工具之一。正如在[Substrate赋能开发者](https://docs.substrate.io/)中提到的，FRAME是**Framework for Runtime Aggregation of Modularized Entities**的缩写，它包含了大量的模块和支持库，简化了运行时开发。在Substrate中，这些模块——称为pallet——提供了可定制的业务逻辑，用于不同的用例和特性，你可以在你的运行时中包含它们。例如，有一些pallets提供了一个业务逻辑的框架，用于staking, consensus, governance等常见的活动。
+[FRAME](https://docs.substrate.io/reference/glossary/#frame)是runtime开发者可用的最强大的工具之一。正如在[Substrate赋能开发者](https://docs.substrate.io/)中提到的，FRAME是**Framework for Runtime Aggregation of Modularized Entities**的缩写，它包含了大量的模块和支持库，简化了runtime开发。在Substrate中，这些模块——称为pallet，提供了针对不同用例的定制化业务逻辑和特性，你可以在自己的runtime中包含它们。例如，有些pallets提供了特定业务逻辑的框架，可以用于staking, consensus, governance等常见的活动。
 
 关于可用的pallets的总结，请参见[FRAME pallets](https://docs.substrate.io/reference/frame-pallets/)。
 
-除了pallets，FRAME还通过以下库和模块提供了与运行时交互的服务
+除了pallets，FRAME还通过以下库和模块提供了与runtime交互的服务
 
-- [FRAME system crate `frame_system`](https://paritytech.github.io/substrate/master/frame_system/index.html)为运行时提供了低级类型、存储和函数。
-- [FRAME support crate `frame_support`](https://paritytech.github.io/substrate/master/frame_support/index.html)是一个Rust宏、类型、特征和模块的集合，简化了Substrate pallets的开发。
-- [FRAME executive pallet `frame_executive`](https://paritytech.github.io/substrate/master/frame_executive/index.html)协调了传入函数调用到运行时中相应pallets的执行。
+- [FRAME system crate `frame_system`](https://paritytech.github.io/substrate/master/frame_system/index.html)为runtime提供了底层类型、存储和函数。
+- [FRAME support crate `frame_support`](https://paritytech.github.io/substrate/master/frame_support/index.html)是一系列Rust宏、类型、trait和模块的集合，简化了Substrate pallets的开发。
+- [FRAME executive pallet `frame_executive`](https://paritytech.github.io/substrate/master/frame_executive/index.html)将收到的函数调用请求调度到runtime相应的pallet中执行。
 
-下图说明了FRAME及其system, support, 和executives模块如何为运行时环境提供服务。
+下图说明了FRAME及其system, support, 和executives模块如何为runtime环境提供服务。
 
 ![](https://docs.substrate.io/static/26bc9a1dad7d0bb2198e86a5ee6dd885/18091/runtime-and-frame.webp)
 
-### 使用pallets组合出一个运行时
+### 使用pallets组合出一个runtime
 
-你可以在不使用FRAME的情况下构建一个基于Substrate的区块链。然而，FRAME pallets使你能够使用预定义的组件作为起点，组合定制运行时逻辑。每个pallet定义了特定的类型、存储项和函数，以实现运行时的一组特定特性或功能。
+你可以在不使用FRAME的情况下构建一个基于Substrate的区块链。然而，FRAME pallets使你能够使用预定义的组件作为起点，组合定制runtime逻辑。每个pallet定义了特定的类型、存储项和函数，以实现runtime的一组特定特性或功能。
 
-下图说明了你如何选择和组合FRAME pallets来组成一个运行时。
+下图说明了你如何选择和组合FRAME pallets来组成一个runtime。
 
 
 ![](https://docs.substrate.io/static/64b2fcb61748ae77f4dd4c9ce63872b1/62cd2/compose-runtime.webp)
@@ -75,21 +75,21 @@ Substrate还定义了运行时必须实现的核心原语。Substrate框架对�
 
 ### 构建自定义pallets
 
-除了预构建的FRAME pallets库外，你还可以使用FRAME库和服务来构建你的自定义pallets。通过自定义pallets，你可以灵活地定义最适合你的目的的运行时行为。因为每个pallet都有自己的独立逻辑，你可以组合预构建的和自定义的pallets来控制你的区块链提供的特性和功能，以达到你想要的结果。
+除了预构建的FRAME pallets库外，你还可以使用FRAME库和服务来构建自定义的pallet。通过自定义pallet，你可以灵活地定义最适合你的runtime行为。因为每个pallet都有自己的独立逻辑，你可以组合预构建和自定义的pallets来控制你的区块链提供的特性和功能，以达到你想要的结果。
 
-例如，你可能会在你的运行时中包含[Balances pallet](https://github.com/paritytech/polkadot-sdk/tree/master/substrate/frame/balances)，以使用其与加密货币相关的存储项和函数来管理代币，但是添加自定义逻辑来在账户余额发生变化时调用你编写的pallet。
+例如，你可能会在自己的runtime中包含[Balances pallet](https://github.com/paritytech/polkadot-sdk/tree/master/substrate/frame/balances)，以使用它所实现的与加密货币相关的存储项和函数来管理代币，也可以添加自定义逻辑，当账户余额发生变化时调用你编写的pallet。
 
 大多数pallets都是由以下部分的某种组合构成的：
 
 - 导入和依赖
 - Pallet类型声明
-- 运行时配置特性
-- 运行时存储
-- 运行时事件
-- 在特定上下文中应执行的逻辑的钩子
+- runtime配置trait
+- runtime存储
+- runtime事件
+- 在特定上下文中应执行的hooks逻辑
 - 可以用来执行交易的函数调用
 
-例如，如果你想定义一个自定义pallet，你可能会从一个类似于以下的pallet骨架结构开始：
+例如，如果你想开发一个自定义pallet，你可能会从一个类似于下面的pallet骨架结构开始：
 
 
 ```rust
@@ -133,15 +133,15 @@ pub mod pallet {
 }
 ```
 
-你可以根据需要，使用部分或全部版块来组合pallets。当你开始设计和构建你的自定义运行时时，你将更多地了解FRAME库和用于定义配置trait、存储项、事件和错误的运行时原语，以及如何编写被分派到运行时执行的函数调用。
+你可以根据需要，使用部分或全部组件来构建pallet。当你开始设计和构建你的自定义runtime时，你将更多地了解FRAME库和runtime原语，如用于定义配置项的trait、存储项、事件和错误类型，以及如何编写runtime执行所需的可调用函数。
 
 ## 下一步
 
 
-现在你已经熟悉了Substrate运行时开发和使用pallets的基础知识，可以探索以下主题和教程以了解更多。
+现在你已经熟悉了Substrate runtime开发和使用pallet的基础知识，可以开始探索以下主题和教程。
 
 - [Frame pallets](https://docs.substrate.io/reference/frame-pallets/)
-- [将模块添加到运行时](https://docs.substrate.io/tutorials/build-application-logic/add-a-pallet/)
+- [将模块添加到runtime](https://docs.substrate.io/tutorials/build-application-logic/add-a-pallet/)
 - [为Substrate准备的Rust](https://docs.substrate.io/learn/rust-basics/)
 - [宏参考](https://docs.substrate.io/reference/frame-macros/)
 - [在自定义pallet中使用宏](https://docs.substrate.io/tutorials/build-application-logic/use-macros-in-a-custom-pallet/)
