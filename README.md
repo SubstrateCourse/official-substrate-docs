@@ -15,4 +15,4 @@ Potencial status includes `translated`, `refined`, `proofed`, `published`.
 - [State transitions and storage](https://docs.substrate.io/learn/state-transitions-and-storage/), published
 - [What you can build](https://docs.substrate.io/learn/what-can-you-build/), published
 - [Runtime Development](https://docs.substrate.io/learn/runtime-development/), published
-- [Transactions and Block Basics](https://docs.substrate.io/learn/transaction-types/), refined
+- [Transactions and Block Basics](https://docs.substrate.io/learn/transaction-types/), published
