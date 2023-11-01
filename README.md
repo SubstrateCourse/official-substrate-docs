@@ -16,5 +16,5 @@ Potencial status includes `translated`, `refined`, `proofed`, `published`.
 - [What you can build](https://docs.substrate.io/learn/what-can-you-build/), published
 - [Runtime Development](https://docs.substrate.io/learn/runtime-development/), published
 - [Transactions and Block Basics](https://docs.substrate.io/learn/transaction-types/), published
-- [Rust for Substrate](https://docs.substrate.io/learn/rust-basics/), refined
-- [Offchain operations](https://docs.substrate.io/learn/offchain-operations/), refined
+- [Rust for Substrate](https://docs.substrate.io/learn/rust-basics/), published
+- [Offchain operations](https://docs.substrate.io/learn/offchain-operations/), published
