@@ -19,4 +19,5 @@ Potencial status includes `translated`, `refined`, `proofed`, `published`.
 - [Rust for Substrate](https://docs.substrate.io/learn/rust-basics/), published
 - [Offchain operations](https://docs.substrate.io/learn/offchain-operations/), published
 - [Light clients in Substrate Connect](https://docs.substrate.io/learn/light-clients-in-substrate-connect/), refined
+- [Cross-consensus messaging](https://docs.substrate.io/learn/xcm-communication/), refined
 - 
