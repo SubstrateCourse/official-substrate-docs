@@ -31,6 +31,7 @@ Substrate Connect可作为一个Node.js包使用，可以通过`npm`包管理器
 你可以使用这里列出的名称连接到以下公共区块链网络：
 
 |要连接的链 | 使用的链标识符|
+| -------- | -------- |
 |[Polkadot](https://polkadot.network/) | `polkadot`|
 |[Kusama](https://kusama.network/) | `ksmcc3`|
 |[Westend](https://wiki.polkadot.network/docs/en/maintain-networks#westend-test-network) | `westend2`|
