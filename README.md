@@ -11,7 +11,7 @@ Potencial status includes `translated`, `refined`, `proofed`, `published`.
 - [Consensus](https://docs.substrate.io/learn/consensus/), published
 - [Blockchain basics](https://docs.substrate.io/learn/blockchain-basics/), published
 - [Architecture and Rust Libraries](https://docs.substrate.io/learn/architecture/), published
-- [Networks and nodes](https://docs.substrate.io/learn/networks-and-nodes/), published 
+- [Networks and nodes](https://docs.substrate.io/learn/networks-and-nodes/), published
 - [State transitions and storage](https://docs.substrate.io/learn/state-transitions-and-storage/), published
 - [What you can build](https://docs.substrate.io/learn/what-can-you-build/), published
 - [Runtime Development](https://docs.substrate.io/learn/runtime-development/), published
@@ -19,5 +19,5 @@ Potencial status includes `translated`, `refined`, `proofed`, `published`.
 - [Rust for Substrate](https://docs.substrate.io/learn/rust-basics/), published
 - [Offchain operations](https://docs.substrate.io/learn/offchain-operations/), published
 - [Light clients in Substrate Connect](https://docs.substrate.io/learn/light-clients-in-substrate-connect/), published
-- [Cross-consensus messaging](https://docs.substrate.io/learn/xcm-communication/), refined
-- 
+- [Cross-consensus messaging](https://docs.substrate.io/learn/xcm-communication/), published
+-
