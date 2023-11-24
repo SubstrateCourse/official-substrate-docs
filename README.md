@@ -20,4 +20,4 @@ Potencial status includes `translated`, `refined`, `proofed`, `published`.
 - [Offchain operations](https://docs.substrate.io/learn/offchain-operations/), published
 - [Light clients in Substrate Connect](https://docs.substrate.io/learn/light-clients-in-substrate-connect/), published
 - [Cross-consensus messaging](https://docs.substrate.io/learn/xcm-communication/), published
--
+- [Linux development environment](https://docs.substrate.io/install/linux/), refined
