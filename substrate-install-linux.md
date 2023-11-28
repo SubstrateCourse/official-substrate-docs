@@ -3,11 +3,11 @@ https://docs.substrate.io/install/linux/
 
 # Linux开发环境
 
-Rust支持大多数Linux发行版，由于发行版和操作系统版本之间的不一致，你可能需要在环境中添加一些软件依赖项。总的来说，你的开发环境应包括链接器或C兼容编译器，如`clang`，以及合适的集成开发环境（IDE）。
+Rust支持大多数Linux发行版，根据您使用的操作系统的发行版本，你可能需要在环境中添加一些软件依赖项。总的来说，你的开发环境应包括链接器或C兼容编译器，如`clang`，以及合适的集成开发环境（IDE）。
 
 ## 在开始之前 
 
-请查阅你的操作系统文档，了解已安装的包的信息，以及如何下载和安装你可能需要的任何其它包。例如，如果你使用Ubuntu，你可以使用Ubuntu高级包装工具（`apt`）来安装`build-essential`包：
+请查阅你的操作系统文档，了解已安装的包的信息，以及如何下载和安装你可能需要的任何其它包。例如，如果你使用Ubuntu，你可以使用Ubuntu包管理工具（`apt`）来安装`build-essential`包：
 ```
 sudo apt install build-essential
 ```
@@ -22,8 +22,8 @@ clang curl git make
 在Linux上安装Rust工具链：
 
 1. 登录你的计算机并打开一个终端shell。
-2. 通过运行你的Linux发行版的包管理命令，检查你在本地计算机上已安装的包。
-3. 通过运行你的Linux发行版的包管理命令，将你缺少的任何包依赖项添加到你的本地开发环境。
+2. 通过运行你的Linux发行版的包管理命令，检查你在本地计算机上已安装的软件包。
+3. 通过运行你的Linux发行版的包管理命令，将缺少的依赖项添加到你的本地开发环境。
 
 例如，在Ubuntu桌面或Ubuntu服务器上，你可能会运行类似于以下的命令：
 ```
@@ -108,7 +108,7 @@ rustc 1.65.0-nightly (34a6cae28 2022-08-09)
 
 现在你已经安装了Rust并为Substrate开发配置了Rust工具链，你可以通过克隆Substrate **node template** 仓库并编译Substrate节点来完成开发环境的设置。
 
-node template 提供了一个工作环境，其中包括构建区块链所需的所有最常见功能，而没有任何多余的模块或工具。为了确保node template为你提供一个相对稳定的实验环境，建议的最佳实践是从Substrate开发者中心仓库克隆Substrate node template，而不是从核心Substrate仓库克隆。
+node template 提供了一个工作环境，其中包括构建区块链所需的所有最常见功能，并且没有任何多余的模块或工具。为了确保node template为你提供一个相对稳定的实验环境，推荐的最佳实践是从Substrate开发者中心仓库克隆Substrate node template，而不是从Substrate仓库克隆。
 
 要编译Substrate node template：
 
@@ -136,7 +136,7 @@ cargo build --release
 
 ## 下一步
 
-Substrate Developer Hub 是社区资源的中心门户。根据你的兴趣和学习风格，你可能会偏好某一种方式。例如，如果你喜欢阅读源代码并且熟悉Rust，你可能想从深入研究[Rust API](https://paritytech.github.io/substrate/master)开始。这是一种很好的方式，可以让你更深入地理解和掌握Substrate的工作原理。如果你有任何问题或需要进一步的帮助，随时告诉我！
+Substrate Developer Hub 是社区资源的中心门户。根据你的兴趣和学习风格，你可能会偏好某一种方式。例如，如果你喜欢阅读源代码并且熟悉Rust，你可能想从深入研究[Rust API](https://paritytech.github.io/substrate/master)开始。
 
 Tell me
 - [Architecture](https://docs.substrate.io/learn/architecture/)
