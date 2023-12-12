@@ -22,6 +22,6 @@ Potencial status includes `translated`, `refined`, `proofed`, `published`.
 - [Cross-consensus messaging](https://docs.substrate.io/learn/xcm-communication/), published
 - [Linux development environment](https://docs.substrate.io/install/linux/), published
 - [MacOS development environment](https://docs.substrate.io/install/macos/), published
-- [Windows development environment](https://docs.substrate.io/install/windows/), refined
+- [Windows development environment](https://docs.substrate.io/install/windows/), published 
 - [Developer tools](https://docs.substrate.io/install/developer-tools/), refined
 - [Rust toolchain](https://docs.substrate.io/install/rust-toolchain/), refined
