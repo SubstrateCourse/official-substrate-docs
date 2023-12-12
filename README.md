@@ -21,7 +21,7 @@ Potencial status includes `translated`, `refined`, `proofed`, `published`.
 - [Light clients in Substrate Connect](https://docs.substrate.io/learn/light-clients-in-substrate-connect/), published
 - [Cross-consensus messaging](https://docs.substrate.io/learn/xcm-communication/), published
 - [Linux development environment](https://docs.substrate.io/install/linux/), published
-- [MacOS development environment](https://docs.substrate.io/install/macos/), refined
+- [MacOS development environment](https://docs.substrate.io/install/macos/), published
 - [Windows development environment](https://docs.substrate.io/install/windows/), refined
 - [Developer tools](https://docs.substrate.io/install/developer-tools/), refined
 - [Rust toolchain](https://docs.substrate.io/install/rust-toolchain/), refined
