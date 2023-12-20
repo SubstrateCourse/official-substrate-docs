@@ -9,11 +9,13 @@ ref: https://docs.substrate.io/install/troubleshoot-rust-issues/
 
 要查看当前使用的 Rust 工具链的信息，请运行以下命令：
 
-```
+```shell
 rustup show
 ```
+
 该命令的输出类似于下面的 Ubuntu 示例：
-```
+
+```shell
 Default host：x86_64-unknown-linux-gnu
 rustup home：  /home/user/.rustup
 
@@ -52,7 +54,7 @@ Substrate 使用 WebAssembly (Wasm) 生成可移植的区块链Runtime。你必�
 
 一般来说，你应该始终使用最新版本的 Rust stable版和nightly版，因为 Substrate 的变化往往取决于 Rust nightly编译器构建的上游变化。为确保 Rust 编译器始终是最新版本，应运行以下命令：
 
-```
+```shell
 rustup update
 rustup update nightly
 rustup target add wasm32-unknown-unknown --toolchain nightly
@@ -62,31 +64,36 @@ rustup target add wasm32-unknown-unknown --toolchain nightly
 
 ## 使用指定的nightly工具链
 
-如果你想保证在更新 Rust 和其他依赖时，你的构建能在你的计算机上正常工作，应该使用特定的 Rust nightly工具链，并知道它与你正在使用的 Substrate 版本是兼容的。不同的项目用的nightly特定版本可能有不同。例如，Polkadot 在其[发布公告](https://github.com/paritytech/polkadot/releases)中披露了这一信息。
+如果你想保证在更新 Rust 和其他依赖时，你的构建能在你的计算机上正常工作，应该使用特定的 Rust nightly工具链，并知道它与你正在使用的 Substrate 版本是兼容的。不同的项目用的nightly特定版本可能有不同。例如，Polkadot 在其[版本发布公告](https://github.com/paritytech/polkadot/releases)中披露了这一信息。
 
 确定要使用的特定nightly工具链版本后，可以通过运行类似下面的命令将其安装到开发环境中：
 
-```
+```shell
 rustup install nightly-<yyyy-MM-dd>
 ```
 
 例如
-```
+```shell
 rustup install nightly-2022-02-16
 ```
+
 安装特定版本的 nightly 工具链后，运行类似下面的命令配置 WebAssembly 目标来使用它：
-```
+
+```shell
 rustup target add wasm32-unknown-unknown --toolchain nightly-<yyyy-MM-dd>
 ```
+
 例如
-```
+
+```shell
 rustup target add wasm32-unknown-unknown --toolchain nightly-2022-02-16
 ```
 
 ### 在环境变量中指定工具链版本
 
 例如，你可以设置 WASM_BUILD_TOOLCHAIN 环境变量来指定编译 WebAssembly 时使用的nightly工具链版本：
-```
+
+```shell
 WASM_BUILD_TOOLCHAIN=nightly-<yyyy-MM-dd> cargo build --release
 ```
 
@@ -114,19 +121,21 @@ source "$HOME/.cargo/env"
 ## M1 macOS用户请安装cmake或protobuf
 
 目前，使用装有 M1 芯片的 macOS 电脑上预装的软件包编译 Substrate 节点时存在问题。
-```
+
+```shell
 error: failed to run custom build command for prost-build v0.10.4
 ```
 如果看到此错误，有两种解决方案。
 
 - 运行以下命令安装 `cmake`：
-```
+
+```shell
 brew install cmake
 ```
 
 - 运行以下命令安装正确的预编译工具 `protoc`：
 
-```
+```shell
 git clone https://github.com/protocolbuffers/protobuf.git
 cd protobuf
 
@@ -144,7 +153,4 @@ sudo make install
 export PATH=/opt/usr/local/bin:$PATH
 
 ```
-
-
-
 

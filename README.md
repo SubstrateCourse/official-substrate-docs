@@ -1,6 +1,7 @@
 # official-substrate-docs
 
-Published at https://subdev.cn
+Published at https://subdev.cn.
+Wechat Publich Account published at Parity Tech, pending new publish because of low read rate (`Developer tools`).
 
 Status:
 
@@ -26,5 +27,5 @@ Potencial status includes `translated`, `refined`, `proofed`, `published`.
 - [MacOS development environment](https://docs.substrate.io/install/macos/), published
 - [Windows development environment](https://docs.substrate.io/install/windows/), published 
 - [Developer tools](https://docs.substrate.io/install/developer-tools/), published
-- [Rust toolchain](https://docs.substrate.io/install/rust-toolchain/), refined
-- [Troubleshoot Rust issues](https://docs.substrate.io/install/troubleshoot-rust-issues/), refined
+- [Rust toolchain](https://docs.substrate.io/install/rust-toolchain/), published
+- [Troubleshoot Rust issues](https://docs.substrate.io/install/troubleshoot-rust-issues/), published
