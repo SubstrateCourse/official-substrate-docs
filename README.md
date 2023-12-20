@@ -1,5 +1,7 @@
 # official-substrate-docs
 
+Published at https://subdev.cn
+
 Status:
 
 Potencial status includes `translated`, `refined`, `proofed`, `published`.
@@ -23,6 +25,6 @@ Potencial status includes `translated`, `refined`, `proofed`, `published`.
 - [Linux development environment](https://docs.substrate.io/install/linux/), published
 - [MacOS development environment](https://docs.substrate.io/install/macos/), published
 - [Windows development environment](https://docs.substrate.io/install/windows/), published 
-- [Developer tools](https://docs.substrate.io/install/developer-tools/), refined
+- [Developer tools](https://docs.substrate.io/install/developer-tools/), published
 - [Rust toolchain](https://docs.substrate.io/install/rust-toolchain/), refined
 - [Troubleshoot Rust issues](https://docs.substrate.io/install/troubleshoot-rust-issues/), refined
