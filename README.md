@@ -1,7 +1,8 @@
 # official-substrate-docs
 
-Published at https://subdev.cn.
-Wechat Publich Account published at Parity Tech, pending new publish because of low read rate (`Developer tools`).
+The Docs are published at https://subdev.cn regularly.
+
+Previouly, also publish to `Parity Tech` Wechat public account, but there is low reading rate, so new docs will not publish to wechat.
 
 Status:
 
