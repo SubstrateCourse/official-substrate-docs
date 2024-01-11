@@ -30,5 +30,5 @@ Potencial status includes `translated`, `refined`, `proofed`, `published`.
 - [Developer tools](https://docs.substrate.io/install/developer-tools/), published
 - [Rust toolchain](https://docs.substrate.io/install/rust-toolchain/), published
 - [Troubleshoot Rust issues](https://docs.substrate.io/install/troubleshoot-rust-issues/), published
-- [Runtime storage structures](https://docs.substrate.io/build/runtime-storage/), refined
+- [Runtime storage structures](https://docs.substrate.io/build/runtime-storage/), proofed
 
